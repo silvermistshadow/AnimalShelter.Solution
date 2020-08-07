@@ -20,6 +20,20 @@ namespace AnimalShelter.Controllers
             return View(model);
         }
 
+        public ActionResult Index(string sort)
+        {
+            IList<Animal> model = _db.Animals.ToList();
+            if(sort == "type")
+            {
+                model = (IList<Animal>) model.OrderBy(s => s.Type);
+            }
+            else if(sort == "date")
+            {
+                model = (IList<Animal>) model.OrderBy(s => s.Date);
+            }
+            return View(model);
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -31,6 +45,12 @@ namespace AnimalShelter.Controllers
             _db.Animals.Add(animal);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(int id)
+        {
+            Animal thisAnimal = _db.Animals.FirstOrDefault(animal => animal.AnimalId == id);
+            return View(thisAnimal);
         }
     }
 }

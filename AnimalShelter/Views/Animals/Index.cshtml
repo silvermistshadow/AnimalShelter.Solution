@@ -7,10 +7,12 @@
 
 <h1>Animals</h1>
 
+<p>Sort by: @Html.ActionLink("Type", "Index", new {sort = "type"}) @Html.ActionLink("Date", "Index", new {sort = "date"})</p>
+
 <ul>
     @foreach(Animal animal in Model)
     {
-        <li>@Html.ActionLink($"{animal.Name}, {animal.Type}", "Details", new {id = animal.AnimalId})</li>
+        <li>@Html.ActionLink($"{animal.Name}, {animal.Type}, {animal.Date}", "Details", new {id = animal.AnimalId})</li>
     }
 </ul>
 
